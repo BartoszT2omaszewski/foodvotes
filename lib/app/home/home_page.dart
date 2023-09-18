@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:najlepsza_pizza_w_miescie/app/cubit/root_cubit.dart';
+import 'package:najlepsza_pizza_w_miescie/app/home/opinie/votes_page_content.dart';
+
 import 'add_opinion/add_opinion_page_content.dart';
 import 'my_account/my_acconut_page_content.dart';
 import 'restaurants/restaurants_page_content.dart';
@@ -35,6 +35,9 @@ class _HomePageState extends State<HomePage> {
               return const RestaurantsPageContent();
             }
             if (currentIdex == 1) {
+              return const VotesPageContent();
+            }
+            if (currentIdex == 2) {
               return AddOpinionPageContent(
                 onSave: () {
                   setState(() {
@@ -48,7 +51,6 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(
             height: 20,
           ),
-       
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -58,14 +60,22 @@ class _HomePageState extends State<HomePage> {
             currentIdex = newIndex;
           });
         },
+        backgroundColor: Colors.white,
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
+        type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.reviews),
+            icon: Icon(Icons.home),
+            label: 'Szukaj',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.check),
             label: 'Opinie',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
-            label: 'Dodaj',
+            label: 'Dodaj Opinie',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
