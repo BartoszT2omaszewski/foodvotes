@@ -6,6 +6,7 @@ class AddOpinionPageContent extends StatefulWidget {
     Key? key,
     required this.onSave,
   }) : super(key: key);
+  
   final Function onSave;
 
   @override

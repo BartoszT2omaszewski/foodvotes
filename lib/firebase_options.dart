@@ -26,10 +26,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -53,10 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDSDwpvVemXzvBnFFJLE0o4Qi01Bk6H9gI',
-    appId: '1:6586098523:android:a96bfe15b0b6f22c54b07e',
-    messagingSenderId: '6586098523',
-    projectId: 'najlepszapizzawmiescier',
-    storageBucket: 'najlepszapizzawmiescier.appspot.com',
+    apiKey: 'AIzaSyCdRpvK2-DWpSpwiMyWE1-o2g4GTSGFWsM',
+    appId: '1:772108827769:android:d5a00ba28efb01276d28a8',
+    messagingSenderId: '772108827769',
+    projectId: 'foodvotes-4bd61',
+    storageBucket: 'foodvotes-4bd61.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyBcC1yMWDGVB-9_RFAYviWhdkIB1aqE3oo',
+    appId: '1:772108827769:ios:7bde35d77f576f416d28a8',
+    messagingSenderId: '772108827769',
+    projectId: 'foodvotes-4bd61',
+    storageBucket: 'foodvotes-4bd61.appspot.com',
+    iosBundleId: 'com.patrykbarszczewski.najlepszaPizzaWMiescie',
   );
 }
