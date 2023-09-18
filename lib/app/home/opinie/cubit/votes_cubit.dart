@@ -3,13 +3,12 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
+import 'package:najlepsza_pizza_w_miescie/app/home/opinie/cubit/votes_state.dart';
 
-part 'restaurants_state.dart';
-
-class RestaurantsCubit extends Cubit<RestaurantsState> {
-  RestaurantsCubit()
+class VotesCubit extends Cubit<VotesState> {
+  VotesCubit()
       : super(
-          const RestaurantsState(
+          const VotesState(
             documents: [],
             errorMessage: '',
             isLoading: false,
@@ -17,10 +16,18 @@ class RestaurantsCubit extends Cubit<RestaurantsState> {
         );
 
   StreamSubscription? _streamSubscription;
+  String _currentSortOrder = 'rating';
+  bool _isDescending = true;
 
   Future<void> start() async {
+    _startListening();
+  }
+
+  void _startListening() {
+    _streamSubscription?.cancel();
+
     emit(
-      const RestaurantsState(
+      const VotesState(
         documents: [],
         isLoading: true,
         errorMessage: '',
@@ -30,13 +37,13 @@ class RestaurantsCubit extends Cubit<RestaurantsState> {
     _streamSubscription = FirebaseFirestore.instance
         .collection('restaurants')
         .orderBy(
-          'rating',
-          descending: true,
+          _currentSortOrder,
+          descending: _isDescending,
         )
         .snapshots()
         .listen((data) {
       emit(
-        RestaurantsState(
+        VotesState(
           documents: data.docs,
           isLoading: false,
           errorMessage: '',
@@ -45,13 +52,24 @@ class RestaurantsCubit extends Cubit<RestaurantsState> {
     })
       ..onError((error) {
         emit(
-          RestaurantsState(
+          VotesState(
             documents: const [],
             isLoading: false,
             errorMessage: error.toString(),
           ),
         );
       });
+  }
+
+  void changeSorting(String newOrder) {
+    if (newOrder == 'rating_desc') {
+      _currentSortOrder = 'rating';
+      _isDescending = true;
+    } else {
+      _currentSortOrder = 'rating';
+      _isDescending = false;
+    }
+    _startListening();
   }
 
   @override
