@@ -9,5 +9,7 @@ class AddOpinionCubit extends Cubit<AddOpinionState> {
           pizzaName: '',
           restaurantName: '',
           rating: 0,
+          location: '',
+          description: '',
         ));
 }

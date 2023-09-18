@@ -6,6 +6,7 @@ class AddOpinionPageContent extends StatefulWidget {
     Key? key,
     required this.onSave,
   }) : super(key: key);
+  
   final Function onSave;
 
   @override
@@ -15,6 +16,8 @@ class AddOpinionPageContent extends StatefulWidget {
 var rating = 3.0;
 var restaurantName = '';
 var pizzaName = '';
+var location = '';
+var description = '';
 
 class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
   @override
@@ -25,9 +28,16 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Text(
+              'Dodaj swoją opinie',
+              style: TextStyle(fontSize: 24, color: Colors.white),
+            ),
+            const SizedBox(
+              height: 90,
+            ),
             TextField(
               decoration:
-                  const InputDecoration(hintText: 'Podaj nazwe restauracji'),
+                  const InputDecoration(hintText: 'Podaj nazwę restauracji'),
               onChanged: (newValue) {
                 setState(() {
                   restaurantName = newValue;
@@ -35,10 +45,26 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
               },
             ),
             TextField(
-              decoration: const InputDecoration(hintText: 'Podaj nazwe pizzy'),
+              decoration: const InputDecoration(hintText: 'Podaj nazwę dania'),
               onChanged: (newValue) {
                 setState(() {
                   pizzaName = newValue;
+                });
+              },
+            ),
+            TextField(
+              decoration: const InputDecoration(hintText: 'Lokalizacja'),
+              onChanged: (newValue) {
+                setState(() {
+                  location = newValue;
+                });
+              },
+            ),
+            TextField(
+              decoration: const InputDecoration(hintText: 'Opis'),
+              onChanged: (newValue) {
+                setState(() {
+                  description = newValue;
                 });
               },
             ),
@@ -55,7 +81,10 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
               label: rating.toString(),
             ),
             ElevatedButton(
-                onPressed: restaurantName.isEmpty || pizzaName.isEmpty
+                onPressed: restaurantName.isEmpty ||
+                        pizzaName.isEmpty ||
+                        location.isEmpty ||
+                        description.isEmpty
                     ? null
                     : () {
                         FirebaseFirestore.instance
@@ -64,6 +93,8 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
                           'name': restaurantName,
                           'pizza': pizzaName,
                           'rating': rating,
+                          'location': location,
+                          'description': description,
                         });
                         widget.onSave();
                       },

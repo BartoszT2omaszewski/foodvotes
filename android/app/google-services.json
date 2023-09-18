@@ -1,43 +1,26 @@
 {
   "project_info": {
-    "project_number": "6586098523",
-    "project_id": "najlepszapizzawmiescier",
-    "storage_bucket": "najlepszapizzawmiescier.appspot.com"
+    "project_number": "772108827769",
+    "project_id": "foodvotes-4bd61",
+    "storage_bucket": "foodvotes-4bd61.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:6586098523:android:a96bfe15b0b6f22c54b07e",
+        "mobilesdk_app_id": "1:772108827769:android:d5a00ba28efb01276d28a8",
         "android_client_info": {
           "package_name": "com.patrykbarszczewski.najlepsza_pizza_w_miescie"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "6586098523-0djnl3q6ssampj8pot4sn3kqq104vmoi.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDSDwpvVemXzvBnFFJLE0o4Qi01Bk6H9gI"
+          "current_key": "AIzaSyCdRpvK2-DWpSpwiMyWE1-o2g4GTSGFWsM"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "6586098523-0djnl3q6ssampj8pot4sn3kqq104vmoi.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "6586098523-h13vnm3fr21u6qrub38f76q2cdcg7dli.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.patrykbarszczewski.najlepszaPizzaWMiescie"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
