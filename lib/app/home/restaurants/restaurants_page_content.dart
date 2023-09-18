@@ -68,6 +68,12 @@ class RestaurantsPageContent extends StatelessWidget {
                               Text(
                                 document['pizza'],
                               ),
+                              Text(
+                                document['location'],
+                              ),
+                              Text(
+                                document['description'],
+                              ),
                             ],
                           ),
                           Text(

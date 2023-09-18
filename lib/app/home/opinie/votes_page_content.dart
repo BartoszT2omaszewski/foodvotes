@@ -92,6 +92,12 @@ class _VotesPageContentState extends State<VotesPageContent> {
                               Text(
                                 document['pizza'],
                               ),
+                              Text(
+                                document['location'],
+                              ),
+                              Text(
+                                document['description'],
+                              ),
                             ],
                           ),
                           Text(
