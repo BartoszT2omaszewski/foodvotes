@@ -6,7 +6,7 @@ class AddOpinionPageContent extends StatefulWidget {
     Key? key,
     required this.onSave,
   }) : super(key: key);
-  
+
   final Function onSave;
 
   @override
@@ -26,47 +26,85 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'Dodaj swoją opinie',
-              style: TextStyle(fontSize: 24, color: Colors.white),
+              'Dodaj swoją opinie:',
+              style: TextStyle(fontSize: 30, color: Colors.white),
             ),
             const SizedBox(
-              height: 90,
+              height: 30,
             ),
-            TextField(
-              decoration:
-                  const InputDecoration(hintText: 'Podaj nazwę restauracji'),
-              onChanged: (newValue) {
-                setState(() {
-                  restaurantName = newValue;
-                });
-              },
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    TextField(
+                      decoration: const InputDecoration(
+                        hintText: 'Podaj nazwę restauracji',
+                        border: InputBorder.none,
+                      ),
+                      onChanged: (newValue) {
+                        setState(() {
+                          restaurantName = newValue;
+                        });
+                      },
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextField(
+                      decoration: const InputDecoration(
+                        hintText: 'Podaj nazwę dania',
+                        border: InputBorder.none,
+                      ),
+                      onChanged: (newValue) {
+                        setState(() {
+                          pizzaName = newValue;
+                        });
+                      },
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextField(
+                      decoration: const InputDecoration(
+                        hintText: 'Lokalizacja',
+                        border: InputBorder.none,
+                      ),
+                      onChanged: (newValue) {
+                        setState(() {
+                          location = newValue;
+                        });
+                      },
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextField(
+                      decoration: const InputDecoration(
+                        hintText: 'Opis',
+                        border: InputBorder.none,
+                      ),
+                      onChanged: (newValue) {
+                        setState(() {
+                          description = newValue;
+                        });
+                      },
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
+              ),
             ),
-            TextField(
-              decoration: const InputDecoration(hintText: 'Podaj nazwę dania'),
-              onChanged: (newValue) {
-                setState(() {
-                  pizzaName = newValue;
-                });
-              },
-            ),
-            TextField(
-              decoration: const InputDecoration(hintText: 'Lokalizacja'),
-              onChanged: (newValue) {
-                setState(() {
-                  location = newValue;
-                });
-              },
-            ),
-            TextField(
-              decoration: const InputDecoration(hintText: 'Opis'),
-              onChanged: (newValue) {
-                setState(() {
-                  description = newValue;
-                });
-              },
+            const SizedBox(
+              height: 10,
             ),
             Slider(
               onChanged: (newValue) {
@@ -81,24 +119,23 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
               label: rating.toString(),
             ),
             ElevatedButton(
-                onPressed: restaurantName.isEmpty ||
-                        pizzaName.isEmpty ||
-                        location.isEmpty ||
-                        description.isEmpty
-                    ? null
-                    : () {
-                        FirebaseFirestore.instance
-                            .collection('restaurants')
-                            .add({
-                          'name': restaurantName,
-                          'pizza': pizzaName,
-                          'rating': rating,
-                          'location': location,
-                          'description': description,
-                        });
-                        widget.onSave();
-                      },
-                child: const Text('Dodaj'))
+              onPressed: restaurantName.isEmpty ||
+                      pizzaName.isEmpty ||
+                      location.isEmpty ||
+                      description.isEmpty
+                  ? null
+                  : () {
+                      FirebaseFirestore.instance.collection('restaurants').add({
+                        'name': restaurantName,
+                        'pizza': pizzaName,
+                        'rating': rating,
+                        'location': location,
+                        'description': description,
+                      });
+                      widget.onSave();
+                    },
+              child: const Text('Dodaj'),
+            ),
           ],
         ),
       ),
