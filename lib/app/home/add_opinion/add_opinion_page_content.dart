@@ -46,6 +46,7 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
                     TextField(
                       decoration: const InputDecoration(
                         hintText: 'Podaj nazwę restauracji',
+                        hintStyle: TextStyle(color: Colors.white),
                         border: InputBorder.none,
                       ),
                       onChanged: (newValue) {
@@ -60,6 +61,7 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
                     TextField(
                       decoration: const InputDecoration(
                         hintText: 'Podaj nazwę dania',
+                        hintStyle: TextStyle(color: Colors.white),
                         border: InputBorder.none,
                       ),
                       onChanged: (newValue) {
@@ -74,6 +76,7 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
                     TextField(
                       decoration: const InputDecoration(
                         hintText: 'Lokalizacja',
+                        hintStyle: TextStyle(color: Colors.white),
                         border: InputBorder.none,
                       ),
                       onChanged: (newValue) {
@@ -88,6 +91,7 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
                     TextField(
                       decoration: const InputDecoration(
                         hintText: 'Opis',
+                        hintStyle: TextStyle(color: Colors.white),
                         border: InputBorder.none,
                       ),
                       onChanged: (newValue) {
