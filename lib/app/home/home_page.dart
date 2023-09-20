@@ -37,8 +37,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
         children: [
           Builder(builder: (context) {
             if (currentIdex == 0) {

@@ -13,7 +13,7 @@ class TextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(top: 8, right: 8, left: 8),
       margin: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,35 +23,37 @@ class TextFieldWidget extends StatelessWidget {
             style: const TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 20,
-              color: Colors.white,
+              color: Colors.white54,
             ),
           ),
+          const SizedBox(height: 8),
           TextFormField(
             controller: controller,
             style: const TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 20,
-              color: Colors.white,
+              color: Colors.white54,
             ),
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
-                  color: Colors.white,
+                  color: Colors.white54,
                   width: 2.0,
                 ),
                 borderRadius: BorderRadius.circular(25),
               ),
               focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Colors.white,
-                    width: 2.0,
-                  ),
-                  borderRadius: BorderRadius.circular(25)),
+                borderSide: const BorderSide(
+                  color: Colors.white54,
+                  width: 2.0,
+                ),
+                borderRadius: BorderRadius.circular(25),
+              ),
               hintText: title,
               hintStyle: const TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 20,
-                color: Colors.white,
+                color: Colors.white54,
               ),
             ),
           ),
