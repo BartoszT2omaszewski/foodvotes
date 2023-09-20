@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:meta/meta.dart';
+
 import 'package:najlepsza_pizza_w_miescie/app/home/opinie/cubit/votes_state.dart';
 
 class VotesCubit extends Cubit<VotesState> {
