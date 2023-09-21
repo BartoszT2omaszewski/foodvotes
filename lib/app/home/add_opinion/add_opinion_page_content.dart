@@ -22,146 +22,132 @@ var description = '';
 class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
+    
     return Center(
-      child: Container(
-        width: screenSize.width,
-        height: screenSize.height,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-              Colors.white.withOpacity(0.8),
-              BlendMode.dstATop,
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            const Text(
+              'Dodaj swoją opinie:',
+              style: TextStyle(fontSize: 30, color: Colors.white),
             ),
-            image: const AssetImage('images/tlo.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              const Text(
-                'Dodaj swoją opinie:',
-                style: TextStyle(fontSize: 30, color: Colors.white),
+            const SizedBox(
+              height: 30,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white),
+                borderRadius: BorderRadius.circular(10.0),
               ),
-              const SizedBox(
-                height: 30,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          TextField(
-                            decoration: const InputDecoration(
-                              hintText: 'Podaj nazwę restauracji',
-                              hintStyle: TextStyle(color: Colors.white),
-                              border: InputBorder.none,
-                            ),
-                            onChanged: (newValue) {
-                              setState(() {
-                                restaurantName = newValue;
-                              });
-                            },
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        TextField(
+                          decoration: const InputDecoration(
+                            hintText: 'Podaj nazwę restauracji',
+                            hintStyle: TextStyle(color: Colors.white),
+                            border: InputBorder.none,
                           ),
-                          const SizedBox(
-                            height: 10,
+                          onChanged: (newValue) {
+                            setState(() {
+                              restaurantName = newValue;
+                            });
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextField(
+                          decoration: const InputDecoration(
+                            hintText: 'Podaj nazwę dania',
+                            hintStyle: TextStyle(color: Colors.white),
+                            border: InputBorder.none,
                           ),
-                          TextField(
-                            decoration: const InputDecoration(
-                              hintText: 'Podaj nazwę dania',
-                              hintStyle: TextStyle(color: Colors.white),
-                              border: InputBorder.none,
-                            ),
-                            onChanged: (newValue) {
-                              setState(() {
-                                pizzaName = newValue;
-                              });
-                            },
+                          onChanged: (newValue) {
+                            setState(() {
+                              pizzaName = newValue;
+                            });
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextField(
+                          decoration: const InputDecoration(
+                            hintText: 'Lokalizacja',
+                            hintStyle: TextStyle(color: Colors.white),
+                            border: InputBorder.none,
                           ),
-                          const SizedBox(
-                            height: 10,
+                          onChanged: (newValue) {
+                            setState(() {
+                              location = newValue;
+                            });
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextField(
+                          decoration: const InputDecoration(
+                            hintText: 'Opis',
+                            hintStyle: TextStyle(color: Colors.white),
+                            border: InputBorder.none,
                           ),
-                          TextField(
-                            decoration: const InputDecoration(
-                              hintText: 'Lokalizacja',
-                              hintStyle: TextStyle(color: Colors.white),
-                              border: InputBorder.none,
-                            ),
-                            onChanged: (newValue) {
-                              setState(() {
-                                location = newValue;
-                              });
-                            },
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextField(
-                            decoration: const InputDecoration(
-                              hintText: 'Opis',
-                              hintStyle: TextStyle(color: Colors.white),
-                              border: InputBorder.none,
-                            ),
-                            onChanged: (newValue) {
-                              setState(() {
-                                description = newValue;
-                              });
-                            },
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                        ],
-                      ),
+                          onChanged: (newValue) {
+                            setState(() {
+                              description = newValue;
+                            });
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              Slider(
-                onChanged: (newValue) {
-                  setState(() {
-                    rating = newValue;
-                  });
-                },
-                value: rating,
-                min: 1.0,
-                max: 6.0,
-                divisions: 10,
-                label: rating.toString(),
-              ),
-              ElevatedButton(
-                onPressed: restaurantName.isEmpty ||
-                        pizzaName.isEmpty ||
-                        location.isEmpty ||
-                        description.isEmpty
-                    ? null
-                    : () {
-                        FirebaseFirestore.instance
-                            .collection('restaurants')
-                            .add({
-                          'name': restaurantName,
-                          'pizza': pizzaName,
-                          'rating': rating,
-                          'location': location,
-                          'description': description,
-                        });
-                        widget.onSave();
-                      },
-                child: const Text('Dodaj'),
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Slider(
+              onChanged: (newValue) {
+                setState(() {
+                  rating = newValue;
+                });
+              },
+              value: rating,
+              min: 1.0,
+              max: 6.0,
+              divisions: 10,
+              label: rating.toString(),
+            ),
+            ElevatedButton(
+              onPressed: restaurantName.isEmpty ||
+                      pizzaName.isEmpty ||
+                      location.isEmpty ||
+                      description.isEmpty
+                  ? null
+                  : () {
+                      FirebaseFirestore.instance
+                          .collection('restaurants')
+                          .add({
+                        'name': restaurantName,
+                        'pizza': pizzaName,
+                        'rating': rating,
+                        'location': location,
+                        'description': description,
+                      });
+                      widget.onSave();
+                    },
+              child: const Text('Dodaj'),
+            ),
+          ],
         ),
       ),
     );
