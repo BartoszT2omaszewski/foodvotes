@@ -12,7 +12,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-            scaffoldBackgroundColor: const Color.fromARGB(255, 214, 214, 214)),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          scaffoldBackgroundColor: const Color(0x25FFFFFF),
+          canvasColor: Colors.transparent,
+        ),
+        builder: ((context, child) {
+          return Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('images/photo.png'), fit: BoxFit.cover)),
+            child: child,
+          );
+        }),
         home: const RootPage());
   }
 }

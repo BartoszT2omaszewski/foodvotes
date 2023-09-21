@@ -26,9 +26,18 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Food Votes'),
+        elevation: 1,
+        backgroundColor: Colors.transparent,
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(3),
+          child: Divider(
+            color: Colors.white,
+            height: 2.0,
+            thickness: 1.2,
+          ),
+        ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
         children: [
           Builder(builder: (context) {
             if (currentIdex == 0) {
@@ -53,35 +62,39 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIdex,
-        onTap: (newIndex) {
-          setState(() {
-            currentIdex = newIndex;
-          });
-        },
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Szukaj',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.check),
-            label: 'Opinie',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Dodaj Opinie',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Moje konto',
-          ),
-        ],
+      bottomNavigationBar: ClipRRect(
+        borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+        child: BottomNavigationBar(
+          currentIndex: currentIdex,
+          onTap: (newIndex) {
+            setState(() {
+              currentIdex = newIndex;
+            });
+          },
+          backgroundColor: const Color.fromARGB(44, 8, 3, 3),
+          selectedItemColor: Colors.blue,
+          unselectedItemColor: Colors.white,
+          type: BottomNavigationBarType.fixed,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Szukaj',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.check),
+              label: 'Opinie',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add),
+              label: 'Dodaj Opinie',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Moje konto',
+            ),
+          ],
+        ),
       ),
     );
   }
