@@ -42,6 +42,7 @@ class LoginPage extends StatelessWidget {
                               children: [
                                 Row(
                                   children: [
+                                    Expanded(child: 
                                     RichText(
                                       text: TextSpan(
                                         style: GoogleFonts.poppins(
@@ -56,6 +57,7 @@ class LoginPage extends StatelessWidget {
                                             ),
                                           ],
                                         ),
+                                        
                                         children: [
                                           WidgetSpan(
                                             child: Transform.translate(
@@ -73,6 +75,8 @@ class LoginPage extends StatelessWidget {
                                           ),
                                         ],
                                       ),
+                                      textAlign: TextAlign.center,
+                                    ),
                                     ),
                                   ],
                                 ),
@@ -108,6 +112,7 @@ class LoginPage extends StatelessWidget {
                       ),
                       //Login textfield
                       TextField(
+                        style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           hintText: 'email',
                           hintStyle: GoogleFonts.nunito(
@@ -128,6 +133,7 @@ class LoginPage extends StatelessWidget {
                       //Register textfield
                       const SizedBox(height: 20),
                       TextField(
+                        style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           hintText: 'hasło',
                           hintStyle: GoogleFonts.nunito(
