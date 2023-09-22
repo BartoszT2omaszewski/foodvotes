@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AddOpinionPageContent extends StatefulWidget {
   const AddOpinionPageContent({
@@ -20,9 +21,22 @@ var location = '';
 var description = '';
 
 class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
+  String? userId;
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) {
+        setState(() {
+          userId = user.uid;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -131,17 +145,17 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
               onPressed: restaurantName.isEmpty ||
                       pizzaName.isEmpty ||
                       location.isEmpty ||
-                      description.isEmpty
+                      description.isEmpty ||
+                      userId == null
                   ? null
                   : () {
-                      FirebaseFirestore.instance
-                          .collection('restaurants')
-                          .add({
+                      FirebaseFirestore.instance.collection('restaurants').add({
                         'name': restaurantName,
                         'pizza': pizzaName,
                         'rating': rating,
                         'location': location,
                         'description': description,
+                        'userId': userId,
                       });
                       widget.onSave();
                     },
