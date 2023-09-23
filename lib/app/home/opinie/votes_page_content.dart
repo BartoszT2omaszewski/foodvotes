@@ -111,28 +111,28 @@ class _VotesPageContentState extends State<VotesPageContent> {
                                 ),
                               ),
                               const SizedBox(
-                                height: 15,
+                                height: 25,
                               ),
                               Text(
                                 'Miasto: ${document['location']}',
                                 style: const TextStyle(color: Colors.white),
                               ),
                               const SizedBox(
-                                height: 10,
+                                height: 15,
                               ),
                               Text(
                                 'Opis: ${document['description']}',
                                 style: const TextStyle(color: Colors.white),
                               ),
                               const SizedBox(
-                                height: 10,
+                                height: 15,
                               ),
                               Text(
                                 'Danie: ${document['pizza']}',
                                 style: const TextStyle(color: Colors.white),
                               ),
                               const SizedBox(
-                                height: 10,
+                                height: 15,
                               ),
                               Text(
                                 'Ocena: ${document['rating'].toString()}',
