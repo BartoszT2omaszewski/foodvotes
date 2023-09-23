@@ -1,7 +1,6 @@
 import 'dart:async';
-
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:najlepsza_pizza_w_miescie/app/home/opinie/cubit/votes_state.dart';
 
