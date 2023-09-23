@@ -56,72 +56,70 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        TextField(
-                          decoration: const InputDecoration(
-                            hintText: 'Podaj nazwę restauracji',
-                            hintStyle: TextStyle(color: Colors.white),
-                            border: InputBorder.none,
-                          ),
-                          onChanged: (newValue) {
-                            setState(() {
-                              restaurantName = newValue;
-                            });
-                          },
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      TextField(
+                        decoration: const InputDecoration(
+                          hintText: 'Podaj nazwę restauracji',
+                          hintStyle: TextStyle(color: Colors.white),
+                          border: InputBorder.none,
                         ),
-                        const SizedBox(
-                          height: 10,
+                        onChanged: (newValue) {
+                          setState(() {
+                            restaurantName = newValue;
+                          });
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextField(
+                        decoration: const InputDecoration(
+                          hintText: 'Podaj nazwę dania',
+                          hintStyle: TextStyle(color: Colors.white),
+                          border: InputBorder.none,
                         ),
-                        TextField(
-                          decoration: const InputDecoration(
-                            hintText: 'Podaj nazwę dania',
-                            hintStyle: TextStyle(color: Colors.white),
-                            border: InputBorder.none,
-                          ),
-                          onChanged: (newValue) {
-                            setState(() {
-                              pizzaName = newValue;
-                            });
-                          },
+                        onChanged: (newValue) {
+                          setState(() {
+                            pizzaName = newValue;
+                          });
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextField(
+                        decoration: const InputDecoration(
+                          hintText: 'Lokalizacja',
+                          hintStyle: TextStyle(color: Colors.white),
+                          border: InputBorder.none,
                         ),
-                        const SizedBox(
-                          height: 10,
+                        onChanged: (newValue) {
+                          setState(() {
+                            location = newValue;
+                          });
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextField(
+                        decoration: const InputDecoration(
+                          hintText: 'Opis',
+                          hintStyle: TextStyle(color: Colors.white),
+                          border: InputBorder.none,
                         ),
-                        TextField(
-                          decoration: const InputDecoration(
-                            hintText: 'Lokalizacja',
-                            hintStyle: TextStyle(color: Colors.white),
-                            border: InputBorder.none,
-                          ),
-                          onChanged: (newValue) {
-                            setState(() {
-                              location = newValue;
-                            });
-                          },
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        TextField(
-                          decoration: const InputDecoration(
-                            hintText: 'Opis',
-                            hintStyle: TextStyle(color: Colors.white),
-                            border: InputBorder.none,
-                          ),
-                          onChanged: (newValue) {
-                            setState(() {
-                              description = newValue;
-                            });
-                          },
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                      ],
-                    ),
+                        onChanged: (newValue) {
+                          setState(() {
+                            description = newValue;
+                          });
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -155,7 +153,7 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
                         'rating': rating,
                         'location': location,
                         'description': description,
-                        'userId': userId,
+                        'userId': userId
                       });
                       widget.onSave();
                     },

@@ -1,4 +1,5 @@
 class OpinionModel {
+  final String userId;
   final double rating;
   final String restaurantName;
   final String pizzaName;
@@ -6,6 +7,7 @@ class OpinionModel {
   final String description;
 
   OpinionModel({
+    required this.userId,
     required this.pizzaName,
     required this.restaurantName,
     required this.rating,
