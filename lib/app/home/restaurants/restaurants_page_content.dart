@@ -59,7 +59,7 @@ class RestaurantsPageContent extends StatelessWidget {
                             color: Colors.white,
                           ),
                           borderRadius: BorderRadius.circular(
-                              15.0), // Zaokrąglenie obramowania
+                              15.0), 
                         ),
                         padding: const EdgeInsets.all(12.0),
                         child: Row(
