@@ -53,33 +53,39 @@ class RestaurantsPageContent extends StatelessWidget {
                   for (final document in documents) ...[
                     Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                document['name'],
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                document['pizza'],
-                              ),
-                              Text(
-                                document['location'],
-                              ),
-                              Text(
-                                document['description'],
-                              ),
-                            ],
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.white,
                           ),
-                          Text(
-                            document['rating'].toString(),
-                          ),
-                        ],
+                          borderRadius: BorderRadius.circular(
+                              15.0), // Zaokrąglenie obramowania
+                        ),
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  document['name'],
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                                const SizedBox(
+                                  height: 40,
+                                ),
+                                Text(document['location'],
+                                    style:
+                                        const TextStyle(color: Colors.white)),
+                              ],
+                            ),
+                            Text(
+                              'Ocena: ${document['rating'].toString()}',
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
