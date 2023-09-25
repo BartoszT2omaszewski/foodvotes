@@ -55,7 +55,10 @@ class _HomePageState extends State<HomePage> {
                 },
               );
             }
-            return MyAccountPageContent(email: widget.user.email);
+            return MyAccountPageContent(
+              email: widget.user.email,
+              userId: widget.user.uid,
+            );
           }),
           const SizedBox(
             height: 20,
