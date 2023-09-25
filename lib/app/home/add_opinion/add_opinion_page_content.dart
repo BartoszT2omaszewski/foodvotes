@@ -128,7 +128,22 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
               height: 10,
             ),
             const SliderAddOpinionPage(
-              labelText: 'Ocena:',
+              labelText: 'Wygląd:',
+            ),
+            const SliderAddOpinionPage(
+              labelText: 'Obsługa:',
+            ),
+            const SliderAddOpinionPage(
+              labelText: 'Atmosfera:',
+            ),
+            const SliderAddOpinionPage(
+              labelText: 'Cena:',
+            ),
+            const SliderAddOpinionPage(
+              labelText: 'Jakość/Świeżość:',
+            ),
+            const SliderAddOpinionPage(
+              labelText: 'Ogólna ocena:',
             ),
             ElevatedButton(
               onPressed: restaurantName.isEmpty ||
