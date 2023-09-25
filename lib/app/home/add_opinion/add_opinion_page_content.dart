@@ -127,17 +127,23 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
             const SizedBox(
               height: 10,
             ),
-            Slider(
-              onChanged: (newValue) {
-                setState(() {
-                  rating = newValue;
-                });
-              },
-              value: rating,
-              min: 1.0,
-              max: 6.0,
-              divisions: 10,
-              label: rating.toString(),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Slider(
+                onChanged: (newValue) {
+                  setState(() {
+                    rating = newValue;
+                  });
+                },
+                value: rating,
+                min: 1.0,
+                max: 6.0,
+                divisions: 10,
+                label: rating.toString(),
+              ),
             ),
             ElevatedButton(
               onPressed: restaurantName.isEmpty ||
