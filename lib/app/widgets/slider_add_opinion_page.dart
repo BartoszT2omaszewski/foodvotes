@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class NoTickMarkShape extends SliderTickMarkShape {
@@ -48,34 +50,47 @@ class _SliderAddOpinionPageState extends State<SliderAddOpinionPage> {
           ),
         ),
         const SizedBox(height: 5),
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.white),
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          child: SliderTheme(
-            data: SliderTheme.of(context).copyWith(
-              trackHeight: 10.0,
-              activeTrackColor: Colors.black,
-              inactiveTrackColor: Colors.grey,
-              tickMarkShape: NoTickMarkShape(),
-              thumbColor: Colors.white,
-              thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 12.0),
-              overlayColor: Colors.white.withOpacity(0.2),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.1),
+                border: Border.all(
+                  color: const Color.fromARGB(255, 194, 194, 194),
+                  width: 3,
+                ),
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              child: SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  trackHeight: 10.0,
+                  activeTrackColor: Colors.black,
+                  inactiveTrackColor: Colors.grey,
+                  tickMarkShape: NoTickMarkShape(),
+                  thumbColor: Colors.white,
+                  thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                  overlayColor: Colors.white.withOpacity(0.2),
+                ),
+                child: Slider(
+                  onChanged: (newValue) {
+                    setState(() {
+                      rating = newValue;
+                    });
+                  },
+                  value: rating,
+                  min: 1.0,
+                  max: 10.0,
+                  divisions: 9,
+                  label: rating.toString(),
+                ),
+              ),
             ),
-            child: Slider(
-              onChanged: (newValue) {
-                setState(() {
-                  rating = newValue;
-                });
-              },
-              value: rating,
-              min: 1.0,
-              max: 10.0,
-              divisions: 9,
-              label: rating.toString(),
-            ),
           ),
+        ),
+        const SizedBox(
+          height: 5,
         ),
       ],
     );
