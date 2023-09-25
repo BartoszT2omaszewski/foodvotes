@@ -6,8 +6,9 @@ import 'package:najlepsza_pizza_w_miescie/app/home/my_account/widgets/opinion_wi
 import 'package:najlepsza_pizza_w_miescie/app/home/my_account/widgets/text_field_widget.dart';
 import 'package:najlepsza_pizza_w_miescie/app/home/my_account/widgets/text_widget.dart';
 import 'package:najlepsza_pizza_w_miescie/app/home/my_account/widgets/visitors_widget.dart';
+import 'package:najlepsza_pizza_w_miescie/app/model/opinion_model.dart';
 
-class MyAccountPageContent extends StatelessWidget {
+class MyAccountPageContent extends StatefulWidget {
   MyAccountPageContent({
     Key? key,
     required this.email,
@@ -16,17 +17,43 @@ class MyAccountPageContent extends StatelessWidget {
 
   final String? email;
   final String userId;
-  final nameControler = TextEditingController();
-  final emailControler = TextEditingController();
+
+  @override
+  State<MyAccountPageContent> createState() => _MyAccountPageContentState();
+}
+
+class _MyAccountPageContentState extends State<MyAccountPageContent> {
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  bool isSortDescending = true;
+  List<OpinionModel> userOpinions = [];
+
+  @override
+  void initState() {
+    super.initState();
+    emailController.text = widget.email ?? '';
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    emailControler.text = email ?? '';
     return BlocProvider(
-      create: (context) => MyAccountCubit()..start(userId),
+      create: (context) => MyAccountCubit()..start(widget.userId),
       child: BlocBuilder<MyAccountCubit, MyAccountState>(
         builder: (context, state) {
-          final userOpinions = state.userOpinions;
+          userOpinions = [...state.userOpinions];
+
+          if (isSortDescending) {
+            userOpinions.sort((a, b) => b.rating.compareTo(a.rating));
+          } else {
+            userOpinions.sort((a, b) => a.rating.compareTo(b.rating));
+          }
 
           return Center(
             child: Column(
@@ -37,9 +64,9 @@ class MyAccountPageContent extends StatelessWidget {
                     radius: 40,
                     backgroundImage: AssetImage('images/kuchnia.jpg'),
                   ),
-                  TextFieldWidget(title: 'Imie', controller: nameControler),
+                  TextFieldWidget(title: 'Imie', controller: nameController),
                   TextFieldWidget(
-                      title: 'Adres email', controller: emailControler),
+                      title: 'Adres email', controller: emailController),
                   const SizedBox(
                     height: 20,
                   ),
@@ -49,6 +76,34 @@ class MyAccountPageContent extends StatelessWidget {
                   ),
                   const Center(
                     child: TextWidget(title: 'MOJE OPINIE:', fontSize: 25),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const TextWidget(title: 'Sortuj po ocenie', fontSize: 18),
+                      IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isSortDescending = false;
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.arrow_upward,
+                            color: Colors.white60,
+                            size: 32,
+                          )),
+                      IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isSortDescending = true;
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.arrow_downward,
+                            color: Colors.white60,
+                            size: 32,
+                          )),
+                    ],
                   ),
                   OpinionWidget(opinions: userOpinions),
                   const SizedBox(
