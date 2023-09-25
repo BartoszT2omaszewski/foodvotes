@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:najlepsza_pizza_w_miescie/app/widgets/slider_add_opinion_page.dart';
 
 class AddOpinionPageContent extends StatefulWidget {
   const AddOpinionPageContent({
@@ -127,24 +128,7 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
             const SizedBox(
               height: 10,
             ),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.white),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Slider(
-                onChanged: (newValue) {
-                  setState(() {
-                    rating = newValue;
-                  });
-                },
-                value: rating,
-                min: 1.0,
-                max: 6.0,
-                divisions: 10,
-                label: rating.toString(),
-              ),
-            ),
+            const SliderAddOpinionPage(),
             ElevatedButton(
               onPressed: restaurantName.isEmpty ||
                       pizzaName.isEmpty ||
