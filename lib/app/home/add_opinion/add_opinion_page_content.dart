@@ -15,7 +15,6 @@ class AddOpinionPageContent extends StatefulWidget {
   State<AddOpinionPageContent> createState() => _AddOpinionPageContentState();
 }
 
-var rating = 3.0;
 var restaurantName = '';
 var pizzaName = '';
 var location = '';
@@ -128,7 +127,9 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
             const SizedBox(
               height: 10,
             ),
-            const SliderAddOpinionPage(),
+            const SliderAddOpinionPage(
+              labelText: 'Ocena:',
+            ),
             ElevatedButton(
               onPressed: restaurantName.isEmpty ||
                       pizzaName.isEmpty ||
