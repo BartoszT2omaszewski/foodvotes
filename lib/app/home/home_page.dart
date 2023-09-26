@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:najlepsza_pizza_w_miescie/app/home/opinie/votes_page_content.dart';
 
 import 'add_opinion/add_opinion_page_content.dart';
@@ -25,13 +26,36 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Food Votes'),
+        title: Container(
+          margin: const EdgeInsets.all(20),
+          decoration: const BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: Color.fromARGB(255, 171, 221, 247),
+                width: 4.0,
+              ),
+            ),
+          ),
+          child: Text(
+            'FoodVotes',
+            style: GoogleFonts.poppins(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              shadows: [
+                const Shadow(
+                  color: Colors.black,
+                  offset: Offset(1, 4),
+                ),
+              ],
+            ),
+          ),
+        ),
         elevation: 1,
         backgroundColor: Colors.transparent,
         bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(3),
+          preferredSize: Size.fromHeight(4),
           child: Divider(
-            color: Colors.white,
+            color: Color.fromARGB(255, 0, 0, 0),
             height: 2.0,
             thickness: 1.2,
           ),
