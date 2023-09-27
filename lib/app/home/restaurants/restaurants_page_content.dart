@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:najlepsza_pizza_w_miescie/app/home/restaurant_details/restaurant_details_page.dart';
 import 'cubit/restaurants_cubit.dart';
 
 class RestaurantsPageContent extends StatelessWidget {
@@ -51,40 +52,50 @@ class RestaurantsPageContent extends StatelessWidget {
               return Column(
                 children: [
                   for (final document in documents) ...[
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.white,
+                    InkWell(
+                      highlightColor: Colors.transparent,
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => RestaurantDetailsPage(
+                            name: document['name'],
+                            location: document['location'],
+                            description: document['description'],
+                            rating: document['rating'],
                           ),
-                          borderRadius: BorderRadius.circular(
-                              15.0), 
                         ),
-                        padding: const EdgeInsets.all(12.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  document['name'],
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                                const SizedBox(
-                                  height: 40,
-                                ),
-                                Text(document['location'],
-                                    style:
-                                        const TextStyle(color: Colors.white)),
-                              ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.white,
                             ),
-                            Text(
-                              'Ocena: ${document['rating'].toString()}',
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ],
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          padding: const EdgeInsets.all(12.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    document['name'],
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                  const SizedBox(
+                                    height: 40,
+                                  ),
+                                  Text(document['location'], style: const TextStyle(color: Colors.white)),
+                                ],
+                              ),
+                              Text(
+                                'Ocena: ${document['rating'].toString()}',
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
