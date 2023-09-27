@@ -13,30 +13,27 @@ class NameAndRatingDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 3,
-            child: DetailsText(text: name),
+    return Row(
+      children: [
+        Expanded(
+          flex: 3,
+          child: DetailsText(text: name),
+        ),
+        Expanded(
+          child: Column(
+            children: [
+              const Text(
+                'Ocena:',
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              Text(
+                rating.toString(),
+                style: const TextStyle(color: Colors.white, fontSize: 20),
+              )
+            ],
           ),
-          Expanded(
-            child: Column(
-              children: [
-                const Text(
-                  'Ocena:',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                Text(
-                  rating.toString(),
-                  style: const TextStyle(color: Colors.white, fontSize: 20),
-                )
-              ],
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 }

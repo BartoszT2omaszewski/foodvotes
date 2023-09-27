@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'restaurants_state.dart';
 
@@ -16,6 +16,8 @@ class RestaurantsCubit extends Cubit<RestaurantsState> {
           ),
         );
 
+  final controller = TextEditingController();
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> documents = [];
   StreamSubscription? _streamSubscription;
 
   Future<void> start() async {
@@ -52,6 +54,25 @@ class RestaurantsCubit extends Cubit<RestaurantsState> {
           ),
         );
       });
+  }
+
+  Future<void> updateData(String value) async {
+    _streamSubscription = FirebaseFirestore.instance
+        .collection('restaurants')
+        .orderBy(
+          'rating',
+          descending: true,
+        )
+        .snapshots()
+        .listen((data) {
+      emit(
+        RestaurantsState(
+          documents: data.docs.where((data) => data['name'].toLowerCase().contains(value.toLowerCase())).toList(),
+          isLoading: false,
+          errorMessage: '',
+        ),
+      );
+    });
   }
 
   @override

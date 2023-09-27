@@ -11,7 +11,7 @@ class NoTickMarkShape extends SliderTickMarkShape {
   @override
   void paint(
     PaintingContext context,
-    Offset offset, {
+    Offset center, {
     required RenderBox parentBox,
     required SliderThemeData sliderTheme,
     required Animation<double> enableAnimation,

@@ -9,7 +9,7 @@ import 'package:najlepsza_pizza_w_miescie/app/home/my_account/widgets/visitors_w
 import 'package:najlepsza_pizza_w_miescie/app/model/opinion_model.dart';
 
 class MyAccountPageContent extends StatefulWidget {
-  MyAccountPageContent({
+  const MyAccountPageContent({
     Key? key,
     required this.email,
     required this.userId,
@@ -65,8 +65,7 @@ class _MyAccountPageContentState extends State<MyAccountPageContent> {
                     backgroundImage: AssetImage('images/kuchnia.jpg'),
                   ),
                   TextFieldWidget(title: 'Imie', controller: nameController),
-                  TextFieldWidget(
-                      title: 'Adres email', controller: emailController),
+                  TextFieldWidget(title: 'Adres email', controller: emailController),
                   const SizedBox(
                     height: 20,
                   ),
@@ -110,8 +109,7 @@ class _MyAccountPageContentState extends State<MyAccountPageContent> {
                     height: 20,
                   ),
                   InkWell(
-                    child: const Text('Wyloguj się',
-                        style: TextStyle(fontSize: 25, color: Colors.white)),
+                    child: const Text('Wyloguj się', style: TextStyle(fontSize: 25, color: Colors.white)),
                     onTap: () {
                       context.read<RootCubit>().signOut();
                     },

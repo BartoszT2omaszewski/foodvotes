@@ -11,14 +11,11 @@ class LocationInfoDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Row(
-        children: [
-          const Expanded(flex: 3, child: DetailsText(text: 'Lokalizacja:')),
-          Expanded(child: DetailsText(text: location)),
-        ],
-      ),
+    return Row(
+      children: [
+        const Expanded(flex: 3, child: DetailsText(text: 'Lokalizacja:')),
+        Expanded(child: DetailsText(text: location)),
+      ],
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'root_state.dart';
 
@@ -28,8 +28,7 @@ class RootCubit extends Cubit<RootState> {
       ),
     );
 
-    _streamSubscription =
-        FirebaseAuth.instance.authStateChanges().listen((user) {
+    _streamSubscription = FirebaseAuth.instance.authStateChanges().listen((user) {
       emit(RootState(
         user: user,
         isLoading: false,
@@ -37,16 +36,16 @@ class RootCubit extends Cubit<RootState> {
         errorMessage: '',
       ));
     })
-          ..onError((error) {
-            emit(
-              RootState(
-                user: null,
-                isLoading: false,
-                isCreatingAccount: false,
-                errorMessage: error.toString(),
-              ),
-            );
-          });
+      ..onError((error) {
+        emit(
+          RootState(
+            user: null,
+            isLoading: false,
+            isCreatingAccount: false,
+            errorMessage: error.toString(),
+          ),
+        );
+      });
   }
 
   Future<void> createAccountButtonPressed() async {
@@ -83,11 +82,7 @@ class RootCubit extends Cubit<RootState> {
     } on FirebaseAuthException catch (error) {
       {
         emit(
-          RootState(
-              errorMessage: error.toString(),
-              isLoading: false,
-              user: null,
-              isCreatingAccount: false),
+          RootState(errorMessage: error.toString(), isLoading: false, user: null, isCreatingAccount: false),
         );
       }
     }
@@ -105,11 +100,7 @@ class RootCubit extends Cubit<RootState> {
     } on FirebaseAuthException catch (error) {
       {
         emit(
-          RootState(
-              errorMessage: error.toString(),
-              isLoading: false,
-              user: null,
-              isCreatingAccount: false),
+          RootState(errorMessage: error.toString(), isLoading: false, user: null, isCreatingAccount: false),
         );
       }
     }

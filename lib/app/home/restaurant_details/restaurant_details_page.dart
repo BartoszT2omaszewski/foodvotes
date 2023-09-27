@@ -22,14 +22,17 @@ class RestaurantDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const DetailsAppBar(),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            NameAndRatingDisplay(name: name, rating: rating),
-            LocationInfoDisplay(location: location),
-            OpinionsListViewDisplay(description: description),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal:8.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              NameAndRatingDisplay(name: name, rating: rating),
+              LocationInfoDisplay(location: location),
+              OpinionsListViewDisplay(description: description),
+            ],
+          ),
         ),
       ),
     );
