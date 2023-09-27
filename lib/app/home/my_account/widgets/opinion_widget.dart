@@ -15,7 +15,7 @@ class OpinionWidget extends StatelessWidget {
     return Container(
       height: 250,
       padding: const EdgeInsets.all(15),
-      margin: EdgeInsets.symmetric(horizontal: 25),
+      margin: const EdgeInsets.symmetric(horizontal: 25),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         border: Border.all(color: Colors.white54, width: 2),
@@ -55,14 +55,9 @@ class OpinionWidget extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TextWidget(
-                          title:
-                              'Nazwa restauracji:  ${opinion.restaurantName}',
-                          fontSize: 20),
-                      TextWidget(
-                          title: 'Danie: ${opinion.pizzaName}', fontSize: 20),
-                      TextWidget(
-                          title: 'Ocena: ${opinion.rating}', fontSize: 20),
+                      TextWidget(title: 'Nazwa restauracji:  ${opinion.restaurantName}', fontSize: 20),
+                      TextWidget(title: 'Danie: ${opinion.pizzaName}', fontSize: 20),
+                      TextWidget(title: 'Ocena: ${opinion.rating}', fontSize: 20),
                     ],
                   ),
                   const Row(
