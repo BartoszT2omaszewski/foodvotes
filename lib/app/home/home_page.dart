@@ -26,29 +26,41 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Container(
-          margin: const EdgeInsets.all(20),
-          decoration: const BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: Color.fromARGB(255, 171, 221, 247),
-                width: 4.0,
+        title: Row(
+          children: [
+            RichText(
+              text: TextSpan(
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 45,
+                  color: Colors.white,
+                  shadows: [
+                    const Shadow(
+                      offset: Offset(4.0, 4.0),
+                      blurRadius: 2.0,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+                children: [
+                  WidgetSpan(
+                    child: Transform.translate(
+                      offset: const Offset(53, -8),
+                      child: Transform.rotate(
+                        angle: 33.27 / 180.0,
+                        child: Image.asset(
+                          'images/Chef-Hat.jpg',
+                        ),
+                      ),
+                    ),
+                  ),
+                  const TextSpan(
+                    text: 'FoodVotes',
+                  ),
+                ],
               ),
             ),
-          ),
-          child: Text(
-            'FoodVotes',
-            style: GoogleFonts.poppins(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              shadows: [
-                const Shadow(
-                  color: Colors.black,
-                  offset: Offset(1, 4),
-                ),
-              ],
-            ),
-          ),
+          ],
         ),
         elevation: 1,
         backgroundColor: Colors.transparent,
