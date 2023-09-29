@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
               text: TextSpan(
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.w600,
-                  fontSize: 45,
+                  fontSize: 22,
                   color: Colors.white,
                   shadows: [
                     const Shadow(
@@ -50,12 +50,19 @@ class _HomePageState extends State<HomePage> {
                         angle: 33.27 / 180.0,
                         child: Image.asset(
                           'images/Chef-Hat.jpg',
+                          height: 45,
+                          width: 45,
                         ),
                       ),
                     ),
                   ),
                   const TextSpan(
                     text: 'FoodVotes',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      decorationThickness: 3.0,
+                      decorationColor: Color.fromARGB(255, 171, 221, 247),
+                    ),
                   ),
                 ],
               ),
