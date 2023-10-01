@@ -27,24 +27,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.person_2,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => MyAccountPageContent(
-                    email: '',
-                    userId: '',
-                  ),
-                ),
-              );
-            },
-          ),
-        ],
         title: Row(
           children: [
             RichText(
