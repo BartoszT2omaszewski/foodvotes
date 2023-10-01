@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:najlepsza_pizza_w_miescie/app/home/opinie/votes_page_content.dart';
+import 'package:najlepsza_pizza_w_miescie/app/home/my_account/cubit/my_account_cubit.dart';
 
 import 'add_opinion/add_opinion_page_content.dart';
 import 'my_account/my_acconut_page_content.dart';
@@ -26,13 +27,22 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: <Widget>[
+        actions: [
           IconButton(
-            onPressed: () {},
             icon: const Icon(
               Icons.person_2,
               color: Colors.white,
             ),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => MyAccountPageContent(
+                    email: '',
+                    userId: '',
+                  ),
+                ),
+              );
+            },
           ),
         ],
         title: Row(
