@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:najlepsza_pizza_w_miescie/app/widgets/slider_add_opinion_page.dart';
 
 class AddOpinionPageContent extends StatefulWidget {
@@ -15,13 +16,14 @@ class AddOpinionPageContent extends StatefulWidget {
   State<AddOpinionPageContent> createState() => _AddOpinionPageContentState();
 }
 
-var restaurantName = '';
 var pizzaName = '';
 var location = '';
 var description = '';
+double rating = 0.0;
 
 class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
   String? userId;
+  TextEditingController restaurantNameController = TextEditingController();
 
   @override
   void initState() {
@@ -43,7 +45,7 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
         child: Column(
           children: [
             const Text(
-              'Dodaj swoją opinie:',
+              'Dodaj swoją opinię:',
               style: TextStyle(fontSize: 30, color: Colors.white),
             ),
             const SizedBox(
@@ -59,16 +61,53 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      TextField(
-                        decoration: const InputDecoration(
-                          hintText: 'Podaj nazwę restauracji',
-                          hintStyle: TextStyle(color: Colors.white),
-                          border: InputBorder.none,
+                      TypeAheadFormField<String>(
+                        textFieldConfiguration: TextFieldConfiguration(
+                          controller: restaurantNameController,
+                          decoration: const InputDecoration(
+                            hintText: 'Podaj nazwę restauracji',
+                            hintStyle: TextStyle(color: Colors.white),
+                            border: InputBorder.none,
+                          ),
                         ),
-                        onChanged: (newValue) {
+                        suggestionsCallback: (pattern) async {
+                          final restaurantsSnapshot = await FirebaseFirestore
+                              .instance
+                              .collection('restaurants')
+                              .where('name', isGreaterThanOrEqualTo: pattern)
+                              .get();
+                          return restaurantsSnapshot.docs
+                              .map((doc) => doc['name'].toString())
+                              .toList();
+                        },
+                        itemBuilder: (context, suggestion) {
+                          return ListTile(
+                            title: Text(suggestion),
+                          );
+                        },
+                        onSuggestionSelected: (suggestion) {
                           setState(() {
-                            restaurantName = newValue;
+                            restaurantNameController.text = suggestion;
                           });
+                        },
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Nazwa restauracji jest wymagana';
+                          }
+                          return null;
+                        },
+                        onSaved: (String? value) {
+                          FirebaseFirestore.instance
+                              .collection('restaurants')
+                              .add({
+                            'name': restaurantNameController.text,
+                            'pizza': pizzaName,
+                            'rating': rating,
+                            'location': location,
+                            'description': description,
+                            'userId': userId
+                          });
+                          widget.onSave();
                         },
                       ),
                       const SizedBox(
@@ -146,7 +185,7 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
               labelText: 'Ogólna ocena:',
             ),
             ElevatedButton(
-              onPressed: restaurantName.isEmpty ||
+              onPressed: restaurantNameController.text.isEmpty ||
                       pizzaName.isEmpty ||
                       location.isEmpty ||
                       description.isEmpty ||
@@ -154,7 +193,7 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
                   ? null
                   : () {
                       FirebaseFirestore.instance.collection('restaurants').add({
-                        'name': restaurantName,
+                        'name': restaurantNameController.text,
                         'pizza': pizzaName,
                         'rating': rating,
                         'location': location,
