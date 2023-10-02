@@ -47,6 +47,42 @@ class MyAccountCubit extends Cubit<MyAccountState> {
       });
   }
 
+  Future<void> updateUserName(String userId, String newName) async {
+    try {
+      await FirebaseFirestore.instance.collection('users').doc(userId).update({
+        'name': newName,
+      });
+      MyAccountState currentState = state;
+
+      MyAccountState updatedState = MyAccountState(
+        isLoading: currentState.isLoading,
+        errorMessage: currentState.errorMessage,
+        userOpinions: currentState.userOpinions,
+      );
+
+      emit(updatedState);
+    } catch (error) {
+      error.toString();
+    }
+  }
+
+  Future<String> getUserName(String userId) async {
+    try {
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .get();
+
+      String userName = userDoc['name'] ?? '';
+
+      return userName;
+    } catch (error) {
+      error.toString();
+
+      return '';
+    }
+  }
+
   @override
   Future<void> close() {
     _streamSubscription?.cancel();
