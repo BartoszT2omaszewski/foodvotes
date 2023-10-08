@@ -32,7 +32,7 @@ class RestaurantsCubit extends Cubit<RestaurantsState> {
     _streamSubscription = FirebaseFirestore.instance
         .collection('restaurants')
         .orderBy(
-          'rating',
+          'average',
           descending: true,
         )
         .snapshots()
@@ -60,7 +60,7 @@ class RestaurantsCubit extends Cubit<RestaurantsState> {
     _streamSubscription = FirebaseFirestore.instance
         .collection('restaurants')
         .orderBy(
-          'rating',
+          'average',
           descending: true,
         )
         .snapshots()

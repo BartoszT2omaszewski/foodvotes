@@ -98,7 +98,7 @@ class RestaurantsPageContent extends StatelessWidget {
                                 name: document['name'],
                                 location: document['location'],
                                 description: document['description'],
-                                rating: document['rating'],
+                                rating: document['average'],
                               ),
                             ),
                           ),
@@ -129,7 +129,7 @@ class RestaurantsPageContent extends StatelessWidget {
                                     ],
                                   ),
                                   Text(
-                                    'Ocena: ${document['rating'].toString()}',
+                                    'Ocena: ${document['average'].toString()}',
                                     style: const TextStyle(color: Colors.white),
                                   ),
                                 ],

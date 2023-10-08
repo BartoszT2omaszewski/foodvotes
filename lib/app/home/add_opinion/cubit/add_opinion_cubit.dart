@@ -18,42 +18,66 @@ class AddOpinionCubit extends Cubit<AddOpinionState> {
 
   void setDishName(String dishName) {
     emit(AddOpinionState(
-      pizzaName: dishName,
+      dishName: dishName,
       restaurantName: state.restaurantName,
       location: state.location,
       description: state.description,
+      appearance: state.appearance,
+      service: state.service,
+      atmosphere: state.atmosphere,
+      prices: state.prices,
+      quality: state.quality,
     ));
   }
 
   void setRestaurantName(String restaurantName) {
     emit(AddOpinionState(
-      pizzaName: state.pizzaName,
+      dishName: state.dishName,
       restaurantName: restaurantName,
       location: state.location,
       description: state.description,
+      appearance: state.appearance,
+      service: state.service,
+      atmosphere: state.atmosphere,
+      prices: state.prices,
+      quality: state.quality,
     ));
   }
 
   void setLocation(String location) {
     emit(AddOpinionState(
-      pizzaName: state.pizzaName,
+      dishName: state.dishName,
       restaurantName: state.restaurantName,
       location: location,
       description: state.description,
+      appearance: state.appearance,
+      service: state.service,
+      atmosphere: state.atmosphere,
+      prices: state.prices,
+      quality: state.quality,
     ));
   }
 
   void setDescription(String description) {
     emit(AddOpinionState(
-      pizzaName: state.pizzaName,
+      dishName: state.dishName,
       restaurantName: state.restaurantName,
       location: state.location,
       description: description,
+      appearance: state.appearance,
+      service: state.service,
+      atmosphere: state.atmosphere,
+      prices: state.prices,
+      quality: state.quality,
     ));
   }
 
   void setAppearanceValue(double rating) {
     emit(AddOpinionState(
+      dishName: state.dishName,
+      restaurantName: state.restaurantName,
+      location: state.location,
+      description: state.description,
       appearance: rating,
       service: state.service,
       atmosphere: state.atmosphere,
@@ -64,6 +88,10 @@ class AddOpinionCubit extends Cubit<AddOpinionState> {
 
   void setServiceValue(double rating) {
     emit(AddOpinionState(
+      dishName: state.dishName,
+      restaurantName: state.restaurantName,
+      location: state.location,
+      description: state.description,
       appearance: state.appearance,
       service: rating,
       atmosphere: state.atmosphere,
@@ -74,6 +102,10 @@ class AddOpinionCubit extends Cubit<AddOpinionState> {
 
   void setAtmosphereValue(double rating) {
     emit(AddOpinionState(
+      dishName: state.dishName,
+      restaurantName: state.restaurantName,
+      location: state.location,
+      description: state.description,
       appearance: state.appearance,
       service: state.service,
       atmosphere: rating,
@@ -84,6 +116,10 @@ class AddOpinionCubit extends Cubit<AddOpinionState> {
 
   void setPricesValue(double rating) {
     emit(AddOpinionState(
+      dishName: state.dishName,
+      restaurantName: state.restaurantName,
+      location: state.location,
+      description: state.description,
       appearance: state.appearance,
       service: state.service,
       atmosphere: state.atmosphere,
@@ -94,6 +130,10 @@ class AddOpinionCubit extends Cubit<AddOpinionState> {
 
   void setQualityValue(double rating) {
     emit(AddOpinionState(
+      dishName: state.dishName,
+      restaurantName: state.restaurantName,
+      location: state.location,
+      description: state.description,
       appearance: state.appearance,
       service: state.service,
       atmosphere: state.atmosphere,
@@ -102,12 +142,16 @@ class AddOpinionCubit extends Cubit<AddOpinionState> {
     ));
   }
 
+  double averageRatingCalculator() =>
+      (state.appearance + state.service + state.atmosphere + state.prices + state.quality) / 5;
+
   void addNewOpinion() {
     FirebaseFirestore.instance.collection('restaurants').add({
       'name': state.restaurantName,
-      'pizza': state.pizzaName,
+      'dish': state.dishName,
       'location': state.location,
       'description': state.description,
+      'average': averageRatingCalculator(),
       'appearance': state.appearance,
       'service': state.service,
       'atmosphere': state.atmosphere,
