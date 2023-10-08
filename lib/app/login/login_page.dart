@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../cubit/root_cubit.dart';
 
 class LoginPage extends StatelessWidget {
@@ -102,7 +103,9 @@ class LoginPage extends StatelessWidget {
                       ),
                       
                       Text(
-                        state.isCreatingAccount == true ? 'Zarejestruj się' : 'Zaloguj się',
+                        state.isCreatingAccount == true
+                            ? 'Zarejestruj się'
+                            : 'Zaloguj się',
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w500,
                           fontSize: 24,
@@ -130,7 +133,8 @@ class LoginPage extends StatelessWidget {
                           ),
                           filled: true,
                           fillColor: Colors.white.withAlpha(50),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 30.0),
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 30.0),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -157,7 +161,8 @@ class LoginPage extends StatelessWidget {
                           ),
                           filled: true,
                           fillColor: Colors.white.withAlpha(50),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 30),
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 30),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: const BorderSide(
@@ -207,7 +212,9 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ),
                               child: Text(
-                                state.isCreatingAccount ? 'Zarejestruj się' : 'Zaloguj się',
+                                state.isCreatingAccount
+                                    ? 'Zarejestruj się'
+                                    : 'Zaloguj się',
                                 style: GoogleFonts.nunito(
                                   fontSize: 18,
                                   color: Colors.white,
@@ -221,7 +228,9 @@ class LoginPage extends StatelessWidget {
                       if (state.isCreatingAccount == false) ...[
                         TextButton(
                           onPressed: () {
-                            context.read<RootCubit>().createAccountButtonPressed();
+                            context
+                                .read<RootCubit>()
+                                .createAccountButtonPressed();
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

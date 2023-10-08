@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:najlepsza_pizza_w_miescie/app/cubit/root_cubit.dart';
 import 'package:najlepsza_pizza_w_miescie/app/home/my_account/cubit/my_account_cubit.dart';
+
 import 'package:najlepsza_pizza_w_miescie/app/home/my_account/widgets/opinion_widget.dart';
 import 'package:najlepsza_pizza_w_miescie/app/home/my_account/widgets/text_field_widget.dart';
 import 'package:najlepsza_pizza_w_miescie/app/home/my_account/widgets/text_widget.dart';
@@ -10,14 +11,13 @@ import 'package:najlepsza_pizza_w_miescie/app/model/opinion_model.dart';
 
 class MyAccountPageContent extends StatefulWidget {
   const MyAccountPageContent({
-    Key? key,
     required this.email,
     required this.userId,
+    Key? key,
   }) : super(key: key);
 
   final String? email;
   final String userId;
-
   @override
   State<MyAccountPageContent> createState() => _MyAccountPageContentState();
 }
@@ -44,7 +44,11 @@ class _MyAccountPageContentState extends State<MyAccountPageContent> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MyAccountCubit()..start(widget.userId),
+      create: (context) => MyAccountCubit()
+        ..start(widget.userId)
+        ..getUserName(widget.userId).then((userName) {
+          nameController.text = userName;
+        }),
       child: BlocBuilder<MyAccountCubit, MyAccountState>(
         builder: (context, state) {
           userOpinions = [...state.userOpinions];
@@ -64,8 +68,18 @@ class _MyAccountPageContentState extends State<MyAccountPageContent> {
                     radius: 40,
                     backgroundImage: AssetImage('images/kuchnia.jpg'),
                   ),
-                  TextFieldWidget(title: 'Imie', controller: nameController),
-                  TextFieldWidget(title: 'Adres email', controller: emailController),
+                  TextFieldWidget(
+                    title: 'Imie i Nazwisko',
+                    controller: nameController,
+                    onTap: () {
+                      String newName = nameController.text;
+                      context
+                          .read<MyAccountCubit>()
+                          .updateUserName(widget.userId, newName);
+                    },
+                  ),
+                  TextFieldWidget(
+                      title: 'Adres email', controller: emailController),
                   const SizedBox(
                     height: 20,
                   ),
@@ -109,7 +123,8 @@ class _MyAccountPageContentState extends State<MyAccountPageContent> {
                     height: 20,
                   ),
                   InkWell(
-                    child: const Text('Wyloguj się', style: TextStyle(fontSize: 25, color: Colors.white)),
+                    child: const Text('Wyloguj się',
+                        style: TextStyle(fontSize: 25, color: Colors.white)),
                     onTap: () {
                       context.read<RootCubit>().signOut();
                     },
