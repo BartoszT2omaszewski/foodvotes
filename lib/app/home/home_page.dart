@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:najlepsza_pizza_w_miescie/app/home/opinie/votes_page_content.dart';
 
 import 'add_opinion/add_opinion_page_content.dart';
@@ -25,13 +26,55 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Food Votes'),
+        title: Row(
+          children: [
+            RichText(
+              text: TextSpan(
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 22,
+                  color: Colors.white,
+                  shadows: [
+                    const Shadow(
+                      offset: Offset(4.0, 4.0),
+                      blurRadius: 2.0,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+                children: [
+                  WidgetSpan(
+                    child: Transform.translate(
+                      offset: const Offset(53, -8),
+                      child: Transform.rotate(
+                        angle: 33.27 / 180.0,
+                        child: Image.asset(
+                          'images/Chef-Hat.jpg',
+                          height: 45,
+                          width: 45,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const TextSpan(
+                    text: 'FoodVotes',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      decorationThickness: 3.0,
+                      decorationColor: Color.fromARGB(255, 171, 221, 247),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
         elevation: 1,
         backgroundColor: Colors.transparent,
         bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(3),
+          preferredSize: Size.fromHeight(4),
           child: Divider(
-            color: Colors.white,
+            color: Color.fromARGB(255, 0, 0, 0),
             height: 2.0,
             thickness: 1.2,
           ),

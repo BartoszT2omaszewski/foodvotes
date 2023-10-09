@@ -42,36 +42,44 @@ class LoginPage extends StatelessWidget {
                               children: [
                                 Row(
                                   children: [
-                                    RichText(
-                                      text: TextSpan(
-                                        style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 45,
-                                          color: Colors.white,
-                                          shadows: [
-                                            const Shadow(
-                                              offset: Offset(4.0, 4.0),
-                                              blurRadius: 2.0,
-                                              color: Colors.black,
-                                            ),
-                                          ],
-                                        ),
-                                        children: [
-                                          WidgetSpan(
-                                            child: Transform.translate(
-                                              offset: const Offset(53, -8),
-                                              child: Transform.rotate(
-                                                angle: 33.27 / 180.0,
-                                                child: Image.asset(
-                                                  'images/Chef-Hat.jpg',
+                                    Expanded(
+                                      child: RichText(
+                                         textDirection: TextDirection.ltr,
+                                        text: TextSpan(
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 45,
+                                            color: Colors.white,
+                                            shadows: [
+                                              const Shadow(
+                                                offset: Offset(4.0, 4.0),
+                                                blurRadius: 2.0,
+                                                color: Colors.black,
+                                              ),
+                                            ],
+                                          ),
+                                          children: [
+                                            WidgetSpan(
+                                              child: Transform.translate(
+                                                offset: const Offset(-26, 79),
+                                                child: Transform.rotate(
+                                                  angle: 33.27 / 180.0,
+                                                  child: Container(margin: const EdgeInsets.only(right: 200),
+                                                    child: Image.asset(
+                                                      'images/Chef-Hat.jpg',
+                                                      
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          const TextSpan(
-                                            text: 'Food Votes',
-                                          ),
-                                        ],
+                                            const TextSpan(
+                                              text: 'Food Votes',
+                                              
+                                            ),
+                                          ],
+                                        ),
+                                        textAlign: TextAlign.center,
                                       ),
                                     ),
                                   ],
@@ -92,9 +100,7 @@ class LoginPage extends StatelessWidget {
                           color: const Color(0xFFC7DFF1),
                         ),
                       ),
-                      const SizedBox(
-                        height: 30,
-                      ),
+                      
                       Text(
                         state.isCreatingAccount == true ? 'Zarejestruj się' : 'Zaloguj się',
                         style: GoogleFonts.poppins(
@@ -108,7 +114,14 @@ class LoginPage extends StatelessWidget {
                       ),
                       //Login textfield
                       TextField(
+                        style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: const BorderSide(
+                                color: Color.fromARGB(208, 211, 204, 204),
+                                width: 3.0),
+                          ),
                           hintText: 'email',
                           hintStyle: GoogleFonts.nunito(
                             textStyle: const TextStyle(
@@ -128,7 +141,14 @@ class LoginPage extends StatelessWidget {
                       //Register textfield
                       const SizedBox(height: 20),
                       TextField(
+                        style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: const BorderSide(
+                                color: Color.fromARGB(208, 211, 204, 204),
+                                width: 3.0),
+                          ),
                           hintText: 'hasło',
                           hintStyle: GoogleFonts.nunito(
                             textStyle: const TextStyle(
@@ -149,9 +169,12 @@ class LoginPage extends StatelessWidget {
                         controller: passwordController,
                         obscureText: true,
                       ),
+                      const SizedBox(
+                        height: 18,
+                      ),
                       Text(state.errorMessage),
                       const SizedBox(
-                        height: 30,
+                        height: 18,
                       ),
                       Row(
                         children: [
@@ -173,6 +196,10 @@ class LoginPage extends StatelessWidget {
                                 }
                               },
                               style: ElevatedButton.styleFrom(
+                                side: const BorderSide(
+                                  width: 3,
+                                  color: Color.fromARGB(208, 211, 204, 204),
+                                ),
                                 minimumSize: const Size.fromHeight(54),
                                 backgroundColor: Colors.white.withAlpha(50),
                                 shape: RoundedRectangleBorder(
@@ -190,6 +217,7 @@ class LoginPage extends StatelessWidget {
                           ),
                         ],
                       ),
+                      const SizedBox(height: 30),
                       if (state.isCreatingAccount == false) ...[
                         TextButton(
                           onPressed: () {
