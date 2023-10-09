@@ -16,6 +16,7 @@ class AddOpinionPageContent extends StatefulWidget {
   State<AddOpinionPageContent> createState() => _AddOpinionPageContentState();
 }
 
+var restaurantName = '';
 var pizzaName = '';
 var location = '';
 var description = '';
