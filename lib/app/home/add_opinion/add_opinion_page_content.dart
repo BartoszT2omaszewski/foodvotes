@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:najlepsza_pizza_w_miescie/app/home/add_opinion/cubit/add_opinion_cubit.dart';
 
 import 'widgets/opinion_slider_widget.dart';
 import 'widgets/opinion_text_field.dart';
 
-class AddOpinionPageContent extends StatelessWidget {
+class AddOpinionPageContent extends StatefulWidget {
   const AddOpinionPageContent({
     Key? key,
     required this.onSave,
@@ -13,8 +16,27 @@ class AddOpinionPageContent extends StatelessWidget {
 
   final Function onSave;
 
-  AddOpinionCubit _addOpinionCubit(BuildContext context) => context.read<AddOpinionCubit>();
+  @override
+  State<AddOpinionPageContent> createState() => _AddOpinionPageContentState();
+}
+
+class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
   static const spaceBetweenFields = 10.0;
+  String? userId;
+  AddOpinionCubit _addOpinionCubit(BuildContext context) => context.read<AddOpinionCubit>();
+  TextEditingController restaurantNameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) {
+        setState(() {
+          userId = user.uid;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +50,52 @@ class AddOpinionPageContent extends StatelessWidget {
               child: Column(
                 children: [
                   const Text(
-                    'Dodaj swoją opinie:',
+                    'Dodaj swoją opinię',
                     style: TextStyle(fontSize: 30, color: Colors.white),
+                  ),
+                  TypeAheadFormField<String>(
+                    textFieldConfiguration: TextFieldConfiguration(
+                      controller: restaurantNameController,
+                      decoration: const InputDecoration(
+                        hintText: 'Podaj nazwę restauracji',
+                        hintStyle: TextStyle(color: Colors.white),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                    suggestionsCallback: (pattern) async {
+                      final restaurantsSnapshot = await FirebaseFirestore.instance
+                          .collection('restaurants')
+                          .where('name', isGreaterThanOrEqualTo: pattern)
+                          .get();
+                      return restaurantsSnapshot.docs.map((doc) => doc['name'].toString()).toList();
+                    },
+                    itemBuilder: (context, suggestion) {
+                      return ListTile(
+                        title: Text(suggestion),
+                      );
+                    },
+                    onSuggestionSelected: (suggestion) {
+                      setState(() {
+                        restaurantNameController.text = suggestion;
+                      });
+                    },
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Nazwa restauracji jest wymagana';
+                      }
+                      return null;
+                    },
+                    onSaved: (String? value) {
+                      FirebaseFirestore.instance.collection('restaurants').add({
+                        'name': restaurantNameController.text,
+                        'pizza': state.dishName,
+                        'rating': state.average,
+                        'location': state.location,
+                        'description': state.description,
+                        'userId': userId
+                      });
+                      widget.onSave();
+                    },
                   ),
                   const SizedBox(height: 30),
                   Container(
@@ -111,7 +177,7 @@ class AddOpinionPageContent extends StatelessWidget {
                         ? null
                         : () {
                             _addOpinionCubit(context).addNewOpinion();
-                            onSave();
+                            widget.onSave();
                           },
                     child: const Text('Dodaj'),
                   ),
