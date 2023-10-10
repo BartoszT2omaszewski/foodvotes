@@ -18,61 +18,145 @@ class AddOpinionCubit extends Cubit<AddOpinionState> {
 
   void setDishName(String dishName) {
     emit(AddOpinionState(
-      pizzaName: dishName,
+      dishName: dishName,
       restaurantName: state.restaurantName,
-      rating: state.rating,
       location: state.location,
       description: state.description,
+      appearance: state.appearance,
+      service: state.service,
+      atmosphere: state.atmosphere,
+      prices: state.prices,
+      quality: state.quality,
     ));
   }
 
   void setRestaurantName(String restaurantName) {
     emit(AddOpinionState(
-      pizzaName: state.pizzaName,
+      dishName: state.dishName,
       restaurantName: restaurantName,
-      rating: state.rating,
       location: state.location,
       description: state.description,
-    ));
-  }
-
-  void setRating(double rating) {
-    emit(AddOpinionState(
-      pizzaName: state.pizzaName,
-      restaurantName: state.restaurantName,
-      rating: rating,
-      location: state.location,
-      description: state.description,
+      appearance: state.appearance,
+      service: state.service,
+      atmosphere: state.atmosphere,
+      prices: state.prices,
+      quality: state.quality,
     ));
   }
 
   void setLocation(String location) {
     emit(AddOpinionState(
-      pizzaName: state.pizzaName,
+      dishName: state.dishName,
       restaurantName: state.restaurantName,
-      rating: state.rating,
       location: location,
       description: state.description,
+      appearance: state.appearance,
+      service: state.service,
+      atmosphere: state.atmosphere,
+      prices: state.prices,
+      quality: state.quality,
     ));
   }
 
   void setDescription(String description) {
     emit(AddOpinionState(
-      pizzaName: state.pizzaName,
+      dishName: state.dishName,
       restaurantName: state.restaurantName,
-      rating: state.rating,
       location: state.location,
       description: description,
+      appearance: state.appearance,
+      service: state.service,
+      atmosphere: state.atmosphere,
+      prices: state.prices,
+      quality: state.quality,
     ));
   }
+
+  void setAppearanceValue(double rating) {
+    emit(AddOpinionState(
+      dishName: state.dishName,
+      restaurantName: state.restaurantName,
+      location: state.location,
+      description: state.description,
+      appearance: rating,
+      service: state.service,
+      atmosphere: state.atmosphere,
+      prices: state.prices,
+      quality: state.quality,
+    ));
+  }
+
+  void setServiceValue(double rating) {
+    emit(AddOpinionState(
+      dishName: state.dishName,
+      restaurantName: state.restaurantName,
+      location: state.location,
+      description: state.description,
+      appearance: state.appearance,
+      service: rating,
+      atmosphere: state.atmosphere,
+      prices: state.prices,
+      quality: state.quality,
+    ));
+  }
+
+  void setAtmosphereValue(double rating) {
+    emit(AddOpinionState(
+      dishName: state.dishName,
+      restaurantName: state.restaurantName,
+      location: state.location,
+      description: state.description,
+      appearance: state.appearance,
+      service: state.service,
+      atmosphere: rating,
+      prices: state.prices,
+      quality: state.quality,
+    ));
+  }
+
+  void setPricesValue(double rating) {
+    emit(AddOpinionState(
+      dishName: state.dishName,
+      restaurantName: state.restaurantName,
+      location: state.location,
+      description: state.description,
+      appearance: state.appearance,
+      service: state.service,
+      atmosphere: state.atmosphere,
+      prices: rating,
+      quality: state.quality,
+    ));
+  }
+
+  void setQualityValue(double rating) {
+    emit(AddOpinionState(
+      dishName: state.dishName,
+      restaurantName: state.restaurantName,
+      location: state.location,
+      description: state.description,
+      appearance: state.appearance,
+      service: state.service,
+      atmosphere: state.atmosphere,
+      prices: state.prices,
+      quality: rating,
+    ));
+  }
+
+  double averageRatingCalculator() =>
+      (state.appearance + state.service + state.atmosphere + state.prices + state.quality) / 5;
 
   void addNewOpinion() {
     FirebaseFirestore.instance.collection('restaurants').add({
       'name': state.restaurantName,
-      'pizza': state.pizzaName,
-      'rating': state.rating,
+      'dish': state.dishName,
       'location': state.location,
       'description': state.description,
+      'average': averageRatingCalculator(),
+      'appearance': state.appearance,
+      'service': state.service,
+      'atmosphere': state.atmosphere,
+      'prices': state.prices,
+      'quality': state.quality,
     });
   }
 }
